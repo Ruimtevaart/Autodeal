@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutionException;
 
 @SessionScoped
 @Named
-public class GeneratePlayerJerseyNumber implements Serializable {
+public class GenerateCarJerseyNumber implements Serializable {
     @Inject
     JerseyNumberGenerator jerseyNumberGenerator;
 
@@ -27,7 +27,7 @@ public class GeneratePlayerJerseyNumber implements Serializable {
 
         jerseyNumberGenerationTask = CompletableFuture.supplyAsync(() -> jerseyNumberGenerator.generateJerseyNumber());
 
-        return  "/playerDetails.xhtml?faces-redirect=true&playerId=" + requestParameters.get("playerId");
+        return  "/carDetails.xhtml?faces-redirect=true&carId=" + requestParameters.get("carId");
     }
 
     public boolean isJerseyGenerationRunning() {
