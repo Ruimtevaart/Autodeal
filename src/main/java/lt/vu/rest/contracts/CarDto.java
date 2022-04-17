@@ -11,4 +11,8 @@ public class CarDto {
     private Integer Year;
 
     private String OwnerName;
+
+    private String Model;
+
+    private Integer Price;
 }

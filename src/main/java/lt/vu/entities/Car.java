@@ -31,6 +31,13 @@ public class Car implements Serializable {
     @JoinColumn(name="OWNER_ID")
     private Owner owner;
 
+    @Size(max = 50)
+    @Column(name = "MODEL")
+    private String model;
+
+    @Column(name = "PRICE")
+    private Integer price;
+
     @Version
     @Column(name = "OPT_LOCK_VERSION")
     private Integer version;
