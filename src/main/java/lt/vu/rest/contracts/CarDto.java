@@ -8,7 +8,7 @@ public class CarDto {
 
     private String Name;
 
-    private Integer JerseyNumber;
+    private Integer Year;
 
     private String OwnerName;
 }

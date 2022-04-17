@@ -24,8 +24,8 @@ public class Car implements Serializable {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "JERSEY_NUMBER")
-    private Integer jerseyNumber;
+    @Column(name = "YEAR")
+    private Integer year;
 
     @ManyToOne
     @JoinColumn(name="OWNER_ID")

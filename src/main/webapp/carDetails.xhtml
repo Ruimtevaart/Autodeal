@@ -9,16 +9,16 @@
 <h:body>
     <h2>#{updateCarDetails.car.name}</h2>
     <h:form>
-        <h:outputText value="jersey number: "/>
-        <h:inputText a:placeholder="enter the value" value="#{updateCarDetails.car.jerseyNumber}" required="true" />
-        <h:commandButton value="update" action="#{updateCarDetails.updateCarJerseyNumber()}">
+        <h:outputText value="year number: "/>
+        <h:inputText a:placeholder="enter the value" value="#{updateCarDetails.car.year}" required="true" />
+        <h:commandButton value="update" action="#{updateCarDetails.updateCarYear()}">
             <f:param name="carId" value="#{updateCarDetails.car.id}" />
         </h:commandButton>
         <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
     </h:form>
     <h:form>
-        <h:outputText value="#{generateCarJerseyNumber.jerseyGenerationStatus}" />
-        <h:commandButton value="Generate car number?" disabled="#{generateCarJerseyNumber.jerseyGenerationRunning}" action="#{generateCarJerseyNumber.generateNewJerseyNumber()}">
+        <h:outputText value="#{generateCarYear.yearGenerationStatus}" />
+        <h:commandButton value="Generate car number?" disabled="#{generateCarYear.yearGenerationRunning}" action="#{generateCarYear.generateNewYear()}">
             <f:param name="carId" value="#{updateCarDetails.car.id}" />
         </h:commandButton>
     </h:form>

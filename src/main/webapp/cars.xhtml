@@ -11,7 +11,7 @@
     <ol>
         <ui:repeat value="#{carsForOwner.owner.cars}" var="car">
             <li>
-                <h:link value="#{car.name} #{car.jerseyNumber}" outcome="carDetails?carId=#{car.id}" />
+                <h:link value="#{car.name} #{car.year}" outcome="carDetails?carId=#{car.id}" />
             </li>
         </ui:repeat>
     </ol>

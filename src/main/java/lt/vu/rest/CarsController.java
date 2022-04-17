@@ -33,7 +33,7 @@ public class CarsController {
 
         CarDto carDto = new CarDto();
         carDto.setName(car.getName());
-        carDto.setJerseyNumber(car.getJerseyNumber());
+        carDto.setYear(car.getYear());
         carDto.setOwnerName(car.getOwner().getName());
 
         return Response.ok(carDto).build();
@@ -52,7 +52,7 @@ public class CarsController {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
             existingCar.setName(carData.getName());
-            existingCar.setJerseyNumber(carData.getJerseyNumber());
+            existingCar.setYear(carData.getYear());
             carsDAO.update(existingCar);
             return Response.ok().build();
         } catch (OptimisticLockException ole) {

@@ -38,7 +38,7 @@ public class UpdateCarDetails implements Serializable {
 
     @Transactional
     @LoggedInvocation
-    public String updateCarJerseyNumber() {
+    public String updateCarYear() {
         try{
             carsDAO.update(this.car);
         } catch (OptimisticLockException e) {
