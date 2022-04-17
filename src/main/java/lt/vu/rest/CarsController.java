@@ -32,7 +32,7 @@ public class CarsController {
         }
 
         CarDto carDto = new CarDto();
-        carDto.setName(car.getName());
+        carDto.setMake(car.getMake());
         carDto.setYear(car.getYear());
         carDto.setOwnerName(car.getOwner().getName());
 
@@ -51,7 +51,7 @@ public class CarsController {
             if (existingCar == null) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
-            existingCar.setName(carData.getName());
+            existingCar.setMake(carData.getMake());
             existingCar.setYear(carData.getYear());
             carsDAO.update(existingCar);
             return Response.ok().build();

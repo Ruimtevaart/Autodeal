@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class CarDto {
 
-    private String Name;
+    private String Make;
 
     private Integer Year;
 

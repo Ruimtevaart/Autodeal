@@ -21,8 +21,8 @@ public class Car implements Serializable {
     private Integer id;
 
     @Size(max = 50)
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "MAKE")
+    private String make;
 
     @Column(name = "YEAR")
     private Integer year;
@@ -44,11 +44,11 @@ public class Car implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
         return Objects.equals(id, car.id) &&
-                Objects.equals(name, car.name);
+                Objects.equals(make, car.make);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, make);
     }
 }

@@ -10,11 +10,11 @@
     <h2>Cars playing in #{carsForOwner.owner.name} owner:</h2>
     <ol>
         <ui:repeat value="#{carsForOwner.owner.cars}" var="car">
-            <li>#{car.name}</li>
+            <li>#{car.make}</li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText a:placeholder="name" value="#{carsForOwner.carToCreate.name}" required="true" />
+        <h:inputText a:placeholder="make" value="#{carsForOwner.carToCreate.make}" required="true" />
         <h:commandButton value="Add car to the owner" action="#{carsForOwner.createCar}" >
             <f:param name="ownerId" value="#{carsForOwner.owner.id}" />
         </h:commandButton>
