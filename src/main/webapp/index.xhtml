@@ -9,11 +9,11 @@
     <h2>Owners:</h2>
     <ol>
         <ui:repeat value="#{owners.allOwners}" var="owner">
-            <li><h:link value="#{owner.name}" outcome="cars?ownerId=#{owner.id}" /></li>
+            <li><h:link value="#{owner.firstName}" outcome="cars?ownerId=#{owner.id}" /></li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText value="#{owners.ownerToCreate.name}" required="true" />
+        <h:inputText value="#{owners.ownerToCreate.firstName}" required="true" />
         <h:commandButton value="Add new owner" actionListener="#{owners.createOwner}" action="index?faces-redirect=true"/>
     </h:form>
     <h:link outcome="myBatis/owners" value="MyBatis implementation"/>

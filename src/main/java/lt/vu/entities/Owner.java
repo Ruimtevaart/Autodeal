@@ -24,7 +24,11 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
     @OneToMany(mappedBy = "owner")
     private List<Car> cars = new ArrayList<>();
@@ -34,12 +38,12 @@ public class Owner {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Owner owner = (Owner) o;
-        return Objects.equals(name, owner.name);
+        return Objects.equals(firstName, owner.firstName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name);
+        return Objects.hash(firstName);
     }
 }

@@ -34,7 +34,7 @@ public class CarsController {
         CarDto carDto = new CarDto();
         carDto.setMake(car.getMake());
         carDto.setYear(car.getYear());
-        carDto.setOwnerName(car.getOwner().getName());
+        carDto.setOwnerFirstName(car.getOwner().getFirstName());
 
         return Response.ok(carDto).build();
     }

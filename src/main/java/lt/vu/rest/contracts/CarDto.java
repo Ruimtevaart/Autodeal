@@ -10,7 +10,7 @@ public class CarDto {
 
     private Integer Year;
 
-    private String OwnerName;
+    private String OwnerFirstName;
 
     private String Model;
 
