@@ -1,5 +1,7 @@
 package lt.vu.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +39,10 @@ public class Car implements Serializable {
 
     @Column(name = "PRICE")
     private Integer price;
+
+    @ManyToMany
+    @JoinColumn(name = "compatibleCars")
+    private List<Part> compatibleParts = new ArrayList<>();
 
     @Version
     @Column(name = "OPT_LOCK_VERSION")
