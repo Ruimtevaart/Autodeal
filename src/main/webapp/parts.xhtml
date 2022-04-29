@@ -9,7 +9,7 @@
         <h2>Parts:</h2>
         <ol>
             <ui:repeat value="#{parts.allParts}" var="part">
-                <li><h:link value="#{part.title} #{part.price}" outcome="parts?partId=#{part.id}" /></li>
+                <li><h:link value="#{part.title} #{part.price}" outcome="partDetails?partId=#{part.id}" /></li>
 <!--                <li><h:link value="#{part.title} #{part.price}" /></li>-->
             </ui:repeat>
         </ol>
