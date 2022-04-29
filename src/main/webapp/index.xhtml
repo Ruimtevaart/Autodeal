@@ -17,6 +17,7 @@
         <h:inputText value="#{owners.ownerToCreate.lastName}" required="true"/>
         <h:commandButton value="Add new owner" actionListener="#{owners.createOwner}" action="index?faces-redirect=true"/>
     </h:form>
-    <h:link outcome="myBatis/owners" value="MyBatis implementation"/>
+    <h:link outcome="myBatis/owners" value="MyBatis implementation"/><br/>
+    <h:link outcome="/parts" value="Parts page"/>
 </h:body>
 </html>
