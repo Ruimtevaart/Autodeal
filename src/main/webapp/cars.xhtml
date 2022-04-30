@@ -7,16 +7,19 @@
       xmlns:f="http://java.sun.com/jsf/core">
 <h:head/>
 <h:body>
-    <h2>Cars playing in #{carsForOwner.owner.firstName} owner:</h2>
+    <h2>#{carsForOwner.owner.firstName} #{carsForOwner.owner.lastName} owns these cars:</h2>
     <ol>
         <ui:repeat value="#{carsForOwner.owner.cars}" var="car">
             <li>
-                <h:link value="#{car.make} #{car.year}" outcome="carDetails?carId=#{car.id}" />
+                <h:link value="#{car.year} #{car.make} #{car.model} #{car.price}" outcome="carDetails?carId=#{car.id}" />
             </li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText a:placeholder="make" value="#{carsForOwner.carToCreate.make}" required="true" />
+        <h:inputText a:placeholder="Year" value="#{carsForOwner.carToCreate.year}" required="true" />
+        <h:inputText a:placeholder="Make" value="#{carsForOwner.carToCreate.make}" required="true" />
+        <h:inputText a:placeholder="Model" value="#{carsForOwner.carToCreate.model}" required="true" />
+        <h:inputText a:placeholder="Price" value="#{carsForOwner.carToCreate.price}" required="true" />
         <h:commandButton value="Add car to the owner"
                          actionListener="#{carsForOwner.createCar}"
                          action="#{'cars?faces-redirect=true&amp;ownerId='.concat(carsForOwner.owner.id)}">
