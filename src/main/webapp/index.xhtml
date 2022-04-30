@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 >
 <h:head/>
 <h:body>
@@ -13,8 +14,8 @@
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText value="#{owners.ownerToCreate.firstName}" required="true"/>
-        <h:inputText value="#{owners.ownerToCreate.lastName}" required="true"/>
+        <h:inputText a:placeholder="First name" value="#{owners.ownerToCreate.firstName}" required="true"/>
+        <h:inputText a:placeholder="Last name" value="#{owners.ownerToCreate.lastName}" required="true"/>
         <h:commandButton value="Add new owner" actionListener="#{owners.createOwner}" action="index?faces-redirect=true"/>
     </h:form>
     <h:link outcome="myBatis/owners" value="MyBatis implementation"/><br/>
