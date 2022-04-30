@@ -11,9 +11,9 @@
     <h2>#{carsForPart.part.title}</h2>
     <ol>
         <ui:repeat value="#{carsForPart.part.compatibleCars}" var="car">
-            <li><h:link value="#{car.make} #{car.model} #{car.year} #{car.price}" /></li>
+            <li><h:link value="#{car.make} #{car.model} #{car.year} #{car.price}" outcome="carDetails?carId=#{car.id}"/></li>
         </ui:repeat>
     </ol>
-    <h:link outcome="index" value="Back to home page"/>
+    <h:link outcome="/parts" value="Back to parts page"/>
 </h:body>
 </html>

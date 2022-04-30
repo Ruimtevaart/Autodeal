@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
 <h:head/>
 <h:body>
@@ -22,6 +23,11 @@
             <f:param name="carId" value="#{updateCarDetails.car.id}" />
         </h:commandButton>
     </h:form>
+    <ol>
+        <ui:repeat value="#{partsForCar.car.compatibleParts}" var="part">
+            <li><h:link value="#{part.title} #{part.price}" outcome="partDetails?partId=#{part.id}"/></li>
+        </ui:repeat>
+    </ol>
     <h:link outcome="index" value="Back to home page"/>
 </h:body>
 </html>
