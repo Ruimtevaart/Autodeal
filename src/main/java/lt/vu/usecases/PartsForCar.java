@@ -1,5 +1,6 @@
 package lt.vu.usecases;
 
+import java.util.Collections;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.entities.Car;
@@ -42,7 +43,7 @@ public class PartsForCar implements Serializable {
     @Transactional
     @LoggedInvocation
     public void createPart() {
-//    partToCreate.setPart(this.part);
+        partToCreate.setCompatibleCars(Collections.singletonList(this.car));
         partsDAO.persist(partToCreate);
     }
 }
