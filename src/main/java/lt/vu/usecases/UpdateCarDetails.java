@@ -4,8 +4,8 @@ package lt.vu.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.interceptors.LoggedInvocation;
-import lt.vu.persistence.PlayersDAO;
-import lt.vu.entities.Player;
+import lt.vu.persistence.CarsDAO;
+import lt.vu.entities.Car;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -20,30 +20,30 @@ import java.util.Map;
 @ViewScoped
 @Named
 @Getter @Setter
-public class UpdatePlayerDetails implements Serializable {
+public class UpdateCarDetails implements Serializable {
 
-    private Player player;
+    private Car car;
 
     @Inject
-    private PlayersDAO playersDAO;
+    private CarsDAO carsDAO;
 
     @PostConstruct
     private void init() {
-        System.out.println("UpdatePlayerDetails INIT CALLED");
+        System.out.println("UpdateCarDetails INIT CALLED");
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        Integer playerId = Integer.parseInt(requestParameters.get("playerId"));
-        this.player = playersDAO.findOne(playerId);
+        Integer carId = Integer.parseInt(requestParameters.get("carId"));
+        this.car = carsDAO.findOne(carId);
     }
 
     @Transactional
     @LoggedInvocation
-    public String updatePlayerJerseyNumber() {
+    public String updateCarYear() {
         try{
-            playersDAO.update(this.player);
+            carsDAO.update(this.car);
         } catch (OptimisticLockException e) {
-            return "/playerDetails.xhtml?faces-redirect=true&playerId=" + this.player.getId() + "&error=optimistic-lock-exception";
+            return "/carDetails.xhtml?faces-redirect=true&carId=" + this.car.getId() + "&error=optimistic-lock-exception";
         }
-        return "players.xhtml?teamId=" + this.player.getTeam().getId() + "&faces-redirect=true";
+        return "cars.xhtml?ownerId=" + this.car.getOwner().getId() + "&faces-redirect=true";
     }
 }

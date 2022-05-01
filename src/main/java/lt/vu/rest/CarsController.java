@@ -1,9 +1,9 @@
 package lt.vu.rest;
 
 import lombok.*;
-import lt.vu.rest.contracts.PlayerDto;
-import lt.vu.entities.Player;
-import lt.vu.persistence.PlayersDAO;
+import lt.vu.rest.contracts.CarDto;
+import lt.vu.entities.Car;
+import lt.vu.persistence.CarsDAO;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,28 +15,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @ApplicationScoped
-@Path("/players")
-public class PlayersController {
+@Path("/cars")
+public class CarsController {
 
     @Inject
     @Setter @Getter
-    private PlayersDAO playersDAO;
+    private CarsDAO carsDAO;
 
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") final Integer id) {
-        Player player = playersDAO.findOne(id);
-        if (player == null) {
+        Car car = carsDAO.findOne(id);
+        if (car == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        PlayerDto playerDto = new PlayerDto();
-        playerDto.setName(player.getName());
-        playerDto.setJerseyNumber(player.getJerseyNumber());
-        playerDto.setTeamName(player.getTeam().getName());
+        CarDto carDto = new CarDto();
+        carDto.setMake(car.getMake());
+        carDto.setYear(car.getYear());
+        carDto.setOwnerFirstName(car.getOwner().getFirstName());
 
-        return Response.ok(playerDto).build();
+        return Response.ok(carDto).build();
     }
 
     @Path("/{id}")
@@ -44,16 +44,16 @@ public class PlayersController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response update(
-            @PathParam("id") final Integer playerId,
-            PlayerDto playerData) {
+            @PathParam("id") final Integer carId,
+            CarDto carData) {
         try {
-            Player existingPlayer = playersDAO.findOne(playerId);
-            if (existingPlayer == null) {
+            Car existingCar = carsDAO.findOne(carId);
+            if (existingCar == null) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
-            existingPlayer.setName(playerData.getName());
-            existingPlayer.setJerseyNumber(playerData.getJerseyNumber());
-            playersDAO.update(existingPlayer);
+            existingCar.setMake(carData.getMake());
+            existingCar.setYear(carData.getYear());
+            carsDAO.update(existingCar);
             return Response.ok().build();
         } catch (OptimisticLockException ole) {
             return Response.status(Response.Status.CONFLICT).build();

@@ -3,19 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 >
 <h:head/>
 <h:body>
-    <h2>Teams:</h2>
+    <h2>Owners:</h2>
     <ol>
-        <ui:repeat value="#{teams.allTeams}" var="team">
-            <li><h:link value="#{team.name}" outcome="players?teamId=#{team.id}" /></li>
+        <ui:repeat value="#{owners.allOwners}" var="owner">
+            <li><h:link value="#{owner.firstName} #{owner.lastName}" outcome="cars?ownerId=#{owner.id}" /></li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText value="#{teams.teamToCreate.name}" required="true" />
-        <h:commandButton value="Add new team" actionListener="#{teams.createTeam}" action="index?faces-redirect=true"/>
+        <h:inputText a:placeholder="First name" value="#{owners.ownerToCreate.firstName}" required="true"/>
+        <h:inputText a:placeholder="Last name" value="#{owners.ownerToCreate.lastName}" required="true"/>
+        <h:commandButton value="Add new owner" actionListener="#{owners.createOwner}" action="index?faces-redirect=true"/>
     </h:form>
-    <h:link outcome="myBatis/teams" value="MyBatis implementation"/>
+    <h:link outcome="myBatis/owners" value="MyBatis implementation"/><br/>
+    <h:link outcome="/parts" value="Parts page"/>
 </h:body>
 </html>

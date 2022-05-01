@@ -10,13 +10,13 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Team.findAll", query = "select t from Team as t")
+        @NamedQuery(name = "Owner.findAll", query = "select t from Owner as t")
 })
-@Table(name = "TEAM")
+@Table(name = "OWNER")
 @Getter @Setter
-public class Team {
+public class Owner {
 
-    public Team(){
+    public Owner(){
 
     }
 
@@ -24,22 +24,26 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
 
-    @OneToMany(mappedBy = "team")
-    private List<Player> players = new ArrayList<>();
+    @Column(name = "LAST_NAME")
+    private String lastName;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Car> cars = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Team team = (Team) o;
-        return Objects.equals(name, team.name);
+        Owner owner = (Owner) o;
+        return Objects.equals(firstName, owner.firstName);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name);
+        return Objects.hash(firstName);
     }
 }

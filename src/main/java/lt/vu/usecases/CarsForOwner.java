@@ -11,38 +11,38 @@ import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.interceptors.LoggedInvocation;
-import lt.vu.persistence.PlayersDAO;
-import lt.vu.persistence.TeamsDAO;
-import lt.vu.entities.Player;
-import lt.vu.entities.Team;
+import lt.vu.persistence.CarsDAO;
+import lt.vu.persistence.OwnersDAO;
+import lt.vu.entities.Car;
+import lt.vu.entities.Owner;
 
 @Model
-public class PlayersForTeam implements Serializable {
+public class CarsForOwner implements Serializable {
 
     @Inject
-    private TeamsDAO teamsDAO;
+    private OwnersDAO ownersDAO;
 
     @Inject
-    private PlayersDAO playersDAO;
+    private CarsDAO carsDAO;
 
     @Getter @Setter
-    private Team team;
+    private Owner owner;
 
     @Getter @Setter
-    private Player playerToCreate = new Player();
+    private Car carToCreate = new Car();
 
     @PostConstruct
     public void init() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        Integer teamId = Integer.parseInt(requestParameters.get("teamId"));
-        this.team = teamsDAO.findOne(teamId);
+        Integer ownerId = Integer.parseInt(requestParameters.get("ownerId"));
+        this.owner = ownersDAO.findOne(ownerId);
     }
 
     @Transactional
     @LoggedInvocation
-    public void createPlayer() {
-        playerToCreate.setTeam(this.team);
-        playersDAO.persist(playerToCreate);
+    public void createCar() {
+        carToCreate.setOwner(this.owner);
+        carsDAO.persist(carToCreate);
     }
 }
