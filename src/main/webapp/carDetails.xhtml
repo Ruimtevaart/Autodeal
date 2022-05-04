@@ -28,15 +28,13 @@
             <li><h:link value="#{part.title} #{part.price}" outcome="partDetails?partId=#{part.id}"/></li>
         </ui:repeat>
     </ol>
-    <h:form>
-        <h:inputText a:placeholder="Title" value="#{partsForCar.partToCreate.title}" required="true" />
-        <h:inputText a:placeholder="Price" value="#{partsForCar.partToCreate.price}" required="true" />
-        <h:commandButton value="Add part"
-                         actionListener="#{partsForCar.createPart}"
-                         action="#{'carDetails?faces-redirect=true&amp;carId='.concat(partsForCar.car.id)}">
-            <f:param name="carId" value="#{partsForCar.car.id}" />
-        </h:commandButton>
-    </h:form>
+
+    <h2>All available parts:</h2>
+    <ol>
+        <ui:repeat value="#{parts.allParts}" var="part">
+            <li><h:link value="#{part.title} #{part.price}" outcome="partDetails?partId=#{part.id}" /><h:link value="Add to car" outcome="carDetails?carId=#{updateCarDetails.car.id}"/></li>
+        </ui:repeat>
+    </ol>
     <h:link outcome="index" value="Back to home page"/>
 </h:body>
 </html>
