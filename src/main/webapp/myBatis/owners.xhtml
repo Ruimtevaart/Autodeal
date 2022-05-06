@@ -2,21 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head/>
 <h:body>
-    <h2>Owners:</h2>
-    <ol>
-        <ui:repeat value="#{ownersMyBatis.allOwners}" var="owner">
-            <li><h:link value="#{owner.firstName} #{owner.lastName}" outcome="cars?ownerId=#{owner.id}" /></li>
-        </ui:repeat>
-    </ol>
+
+    <h2>Add Part to this car</h2>
     <h:form>
-        <h:inputText value="#{ownersMyBatis.ownerToCreate.firstName}" required="true" />
-        <h:inputText value="#{ownersMyBatis.ownerToCreate.lastName}" required="true"/>
-        <h:commandButton value="Add new owner" action="#{ownersMyBatis.createOwner}" />
+        <label>Part name: </label>
+        <h:inputText a:placeholder="name" value="#{ownersForCarMyBatis.partToAdd.name}" required="true" />
+        <h:commandButton value="Add part to the car" action="#{ownersForCarMyBatis.addPartForCar}" >
+            <f:param name="carId" value="#{ownersForCarMyBatis.car.id}" />
+        </h:commandButton>
     </h:form>
-    <h:link value="Back to index" outcome="/index"/>
+
+    <h:link outcome="/myBatis/cars" value="Back to cars page"/>
 </h:body>
 </html>

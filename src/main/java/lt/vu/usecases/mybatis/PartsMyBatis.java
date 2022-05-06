@@ -1,7 +1,7 @@
-package lt.vu.usecases;
+package lt.vu.usecases.mybatis;
 
-import lt.vu.entities.Part;
-import lt.vu.persistence.PartsDAO;
+import lt.vu.mybatis.dao.PartMapper;
+import lt.vu.mybatis.model.Part;
 import lombok.Getter;
 
 import javax.annotation.PostConstruct;
@@ -11,10 +11,10 @@ import java.io.Serializable;
 import java.util.List;
 
 @Model
-public class Parts implements Serializable {
+public class PartsMyBatis implements Serializable {
 
     @Inject
-    private PartsDAO dao;
+    private PartMapper mapper;
 
     @Getter
     private List<Part> allParts;
@@ -25,8 +25,6 @@ public class Parts implements Serializable {
     }
 
     private void loadAllParts() {
-        allParts = dao.findAll();
+        allParts = mapper.selectAll();
     }
-
-
 }

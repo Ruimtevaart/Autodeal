@@ -3,9 +3,9 @@
     <persistence-unit name="CarsPU" transaction-type="JTA">
         <jta-data-source>CarsDataSource</jta-data-source>
         <properties>
-            <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+<!--            <property name="hibernate.hbm2ddl.auto" value="update"/>-->
         </properties>
     </persistence-unit>
 </persistence>

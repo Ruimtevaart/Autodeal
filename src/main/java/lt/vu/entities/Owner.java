@@ -1,49 +1,43 @@
 package lt.vu.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+
+import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "Owner.findAll", query = "select t from Owner as t")
-})
+@Getter
+@Setter
+@NoArgsConstructor
+@FieldDefaults(level = PRIVATE)
 @Table(name = "OWNER")
-@Getter @Setter
+@NamedQueries({
+        @NamedQuery(name = "Owner.findAll", query = "select a from Owner as a")
+})
 public class Owner {
 
-    public Owner(){
-
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = IDENTITY)
+    Integer id;
 
-    @Column(name = "FIRST_NAME")
-    private String firstName;
+    @Column(name = "FULL_NAME")
+    String fullName;
 
-    @Column(name = "LAST_NAME")
-    private String lastName;
+    @ManyToOne
+    @JoinColumn(name = "CAR_ID")
+    private Car car;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Car> cars = new ArrayList<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Owner owner = (Owner) o;
-        return Objects.equals(firstName, owner.firstName);
+    public Owner(String fullName) {
+        this.fullName = fullName;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(firstName);
+    public Owner(String fullName, Car car) {
+        this(fullName);
+        this.car = car;
     }
 }

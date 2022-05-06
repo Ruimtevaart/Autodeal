@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h2>Owners enroled in #{ownersForCar.car.title} car:</h2>
+
+    <ol>
+        <ui:repeat value="#{ownersForCar.car.owners}" var="owner">
+            <li>#{owner.fullName}</li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <label>Owner name: </label>
+        <h:inputText a:placeholder="name" value="#{ownersForCar.ownerToCreate.fullName}" required="true" />
+        <h:commandButton value="Add owner to the car" action="#{ownersForCar.createOwner}" >
+            <f:param name="carId" value="#{ownersForCar.car.id}" />
+        </h:commandButton>
+    </h:form>
+
+    <h2>Add part to this car:</h2>
+    <h:form>
+        <label>Part name: </label>
+        <h:inputText a:placeholder="name" value="#{ownersForCar.partToAdd.name}" required="true" />
+        <h:commandButton value="Add part to the car" action="#{ownersForCar.createPart}" >
+            <f:param name="carId" value="#{ownersForCar.car.id}" />
+        </h:commandButton>
+    </h:form>
+
+    <h:form>
+        <h2>Add part from dropdown:</h2>
+        <label>Part name:</label>
+        <h:selectOneMenu title="Available parts" value="#{ownersForCar.partToAdd}" converter="#{partConverter}">
+            <f:selectItems value="#{ownersForCar.allParts}" var="part" itemValue="#{part.label}" />
+        </h:selectOneMenu>
+
+        <h:commandButton value="Add part to the car" action="#{ownersForCar.createPartFromDropdown}" >
+            <f:param name="carId" value="#{ownersForCar.car.id}" />
+        </h:commandButton>
+    </h:form>
+
+
+    <h:link outcome="index" value="Back to cars page"/>
+
+</h:body>
+</html>
