@@ -33,6 +33,9 @@ public class Part {
     @Column(name = "NAME")
     String name;
 
+    @Column(name = "PRICE")
+    int price;
+
     @Column
     @ManyToMany
     @JoinTable(

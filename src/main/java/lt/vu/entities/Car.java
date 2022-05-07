@@ -32,6 +32,9 @@ public class Car {
     @Column(name = "TITLE")
     String title;
 
+    @Column(name = "PRICE")
+    int price;
+
     @ManyToOne
     @JoinColumn(name = "OWNER_ID")
     Owner owner;

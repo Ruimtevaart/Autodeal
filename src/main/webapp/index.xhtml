@@ -13,7 +13,7 @@
             <span>Cars:</span>
             <ul>
                 <ui:repeat value="#{owner.cars}" var="car">
-                    <li>#{car.title}</li>
+                    <li>#{car.title} #{car.price}</li>
                 </ui:repeat>
             </ul>
         </ui:repeat>
@@ -29,7 +29,7 @@
     <h2>Parts:</h2>
     <ol>
         <ui:repeat value="#{parts.allParts}" var="part">
-            <li>#{part.name}</li>
+            <li>#{part.name} (#{part.price})</li>
             <span>Cars:</span>
             <ul>
                 <ui:repeat value="#{part.cars}" var="car">

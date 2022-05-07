@@ -91,7 +91,7 @@ public class PartsForCar implements Serializable {
         this.allParts = new ArrayList<>();
         List<Part> availableParts = partsDAO.findAll();
         for (Part part : availableParts) {
-            this.allParts.add(new SelectItem(part, part.getName()));
+            this.allParts.add(new SelectItem(part, part.getName(), String.valueOf(part.getPrice())));
         }
     }
 }
