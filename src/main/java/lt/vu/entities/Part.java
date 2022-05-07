@@ -36,7 +36,7 @@ public class Part {
     @Column
     @ManyToMany
     @JoinTable(
-            name = "INSTRUCTED_CAR",
+            name = "PART_CAR",
             joinColumns = @JoinColumn(name = "PART_ID"),
             inverseJoinColumns = @JoinColumn(name = "CAR_ID")
     )
