@@ -32,9 +32,9 @@ public class Car {
     @Column(name = "TITLE")
     String title;
 
-    @OneToMany
-    @JoinColumn(name = "CAR_ID")
-    List<Owner> owners = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "OWNER_ID")
+    Owner owner;
 
     @ManyToMany(mappedBy = "cars")
     List<Part> parts;
@@ -43,9 +43,9 @@ public class Car {
         this.title = title;
     }
 
-    public Car(String title, List<Owner> owners) {
+    public Car(String title, Owner owner) {
         this(title);
-        this.owners = owners;
+        this.owner = owner;
     }
 
 }

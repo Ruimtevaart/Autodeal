@@ -7,6 +7,9 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -28,16 +31,16 @@ public class Owner {
     @Column(name = "FULL_NAME")
     String fullName;
 
-    @ManyToOne
-    @JoinColumn(name = "CAR_ID")
-    private Car car;
+    @OneToMany
+    @JoinColumn(name = "OWNER_ID")
+    private List<Car> cars = new ArrayList<Car>();
 
     public Owner(String fullName) {
         this.fullName = fullName;
     }
 
-    public Owner(String fullName, Car car) {
+    public Owner(String fullName, List<Car> cars) {
         this(fullName);
-        this.car = car;
+        this.cars = cars;
     }
 }

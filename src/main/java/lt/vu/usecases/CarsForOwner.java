@@ -23,7 +23,7 @@ import static java.util.Objects.isNull;
 import static javax.faces.context.FacesContext.getCurrentInstance;
 
 @Model
-public class OwnersForCar implements Serializable {
+public class CarsForOwner implements Serializable {
 
     @Inject
     private CarsDAO carsDAO;
@@ -40,7 +40,15 @@ public class OwnersForCar implements Serializable {
 
     @Getter
     @Setter
+    private Owner owner;
+
+    @Getter
+    @Setter
     private Owner ownerToCreate = new Owner();
+
+    @Getter
+    @Setter
+    private Car carToCreate = new Car();
 
     @Getter
     @Setter
@@ -50,47 +58,16 @@ public class OwnersForCar implements Serializable {
     @Setter
     private List<SelectItem> allParts;
 
-    @Transactional
-    public String createOwner() {
-        ownerToCreate.setCar(this.car);
-        ownersDAO.persist(ownerToCreate);
-        return "owners?faces-redirect=true&carId=" + this.car.getId();
-    }
+    @Getter
+    @Setter
+    private List<SelectItem> allCars;
 
     @Transactional
-    public String createPartFromDropdown() {
-        List<Car> allPartCars = partToAdd.getCars();
-        allPartCars.add(this.car);
-        partToAdd.setCars(allPartCars);
-        partsDAO.update(partToAdd);
-        return "index?faces-redirect=true";
-    }
-
-    @Transactional
-    public String createPart() {
-        Part foundPart = partsDAO.findByName(partToAdd.getName());
-        if (isNull(foundPart)) {
-            handleNewPart();
-        } else {
-            handleExistingPart(foundPart);
-        }
-
-        return "index?faces-redirect=true";
-    }
-
-    private void handleExistingPart(Part foundPart) {
-        partToAdd.setId(foundPart.getId());
-        List<Car> allPartCars = foundPart.getCars();
-        allPartCars.add(this.car);
-        partToAdd.setCars(allPartCars);
-        partsDAO.update(partToAdd);
-    }
-
-    private void handleNewPart() {
-        List<Car> allPartCars = new ArrayList<>();
-        allPartCars.add(this.car);
-        partToAdd.setCars(allPartCars);
-        partsDAO.persist(partToAdd);
+    public String createCar() {
+        carToCreate.setOwner(this.owner);
+        carsDAO.persist(carToCreate);
+        return "cars?faces-redirect=true&ownerId=" + this.owner.getId();
+//        return "/index";
     }
 
     @PostConstruct
@@ -100,8 +77,8 @@ public class OwnersForCar implements Serializable {
                 .getRequestParameterMap();
 
 
-        int carId = Integer.parseInt(requestParams.get("carId"));
-        this.car = carsDAO.findOne(carId);
+        int ownerId = Integer.parseInt(requestParams.get("ownerId"));
+        this.owner = ownersDAO.findOne(ownerId);
         this.allParts = new ArrayList<>();
         List<Part> availableParts = partsDAO.findAll();
         for (Part part : availableParts) {

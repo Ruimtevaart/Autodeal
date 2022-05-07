@@ -6,14 +6,14 @@
 >
 <h:head/>
 <h:body>
-    <h2>Cars:</h2>
+    <h2>Owners:</h2>
     <ol>
-        <ui:repeat value="#{cars.allCars}" var="car">
-            <li><h:link value="#{car.title}" outcome="/owners?carId=#{car.id}"/></li>
-            <span>Parts:</span>
+        <ui:repeat value="#{owners.allOwners}" var="owner">
+            <li><h:link value="#{owner.fullName}" outcome="/cars?ownerId=#{owner.id}"/></li>
+            <span>Cars:</span>
             <ul>
-                <ui:repeat value="#{car.parts}" var="part">
-                    <li>#{part.name}</li>
+                <ui:repeat value="#{owner.cars}" var="car">
+                    <li>#{car.title}</li>
                 </ui:repeat>
             </ul>
         </ui:repeat>
@@ -21,9 +21,9 @@
 <br/>
 <br/>
     <h:form>
-        <label>Car title:</label>
-        <h:inputText value="#{cars.carToCreate.title}" required="true" />
-        <h:commandButton value="Add new car" action="#{cars.createCar}" />
+        <label>Owner name:</label>
+        <h:inputText value="#{owners.ownerToCreate.fullName}" required="true" />
+        <h:commandButton value="Add new owner" action="#{owners.createOwner}" />
     </h:form>
 
     <h2>Parts:</h2>
@@ -39,7 +39,7 @@
         </ui:repeat>
     </ol>
 
-    <h:link outcome="myBatis/cars" value="MyBatis implementation"/>
+    <h:link outcome="myBatis/owners" value="MyBatis implementation"/>
 
 </h:body>
 </html>
