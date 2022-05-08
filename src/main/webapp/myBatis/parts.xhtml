@@ -10,7 +10,7 @@
     <h2>Parts that fit #{partsForCarMyBatis.car.title}</h2>
     <ol>
         <ui:repeat value="#{partsForCarMyBatis.car.parts}" var="part">
-            <li><h:link value="#{part.name} #{part.price}" outcome="/myBatis/owners"/></li>
+            <li><h:link value="#{part.name} #{part.price}" outcome="/myBatis/carsForPart?partId=#{part.id}"/></li>
         </ui:repeat>
     </ol>
     <h2>Add part to this car</h2>

@@ -10,7 +10,16 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="PRICE" jdbcType="INTEGER" property="price" />
+    <collection property="cars" javaType="ArrayList"
+                ofType="lt.vu.mybatis.model.Car" column="id"
+                select="selectCarsForPart"/>
   </resultMap>
+  <select id="selectCarsForPart" resultType="lt.vu.mybatis.model.Car">
+    select *
+    from PUBLIC.car c
+    join PUBLIC.part_car pc on c.id = pc.car_id
+    where pc.part_id = #{id, jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
