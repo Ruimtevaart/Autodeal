@@ -35,6 +35,10 @@ public class PartsDAO {
         }
     }
 
+    public Part findOne(int id) {
+        return entityManager.find(Part.class, id);
+    }
+
     public void update(Part part) {
         entityManager.merge(part);
     }

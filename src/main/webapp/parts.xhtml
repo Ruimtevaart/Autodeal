@@ -10,7 +10,7 @@
     <h2>Parts compatible with #{partsForCar.car.title} (Price #{partsForCar.car.price})</h2>
     <ol>
         <ui:repeat value="#{partsForCar.car.parts}" var="part">
-            <li>#{part.name} #{part.price}</li>
+            <li><h:link value="#{part.name} #{part.price}" outcome="/carsForPart?partId=#{part.id}"/></li>
         </ui:repeat>
     </ol>
     <h2>Add part to this car:</h2>
