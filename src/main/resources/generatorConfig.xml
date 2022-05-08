@@ -19,19 +19,19 @@
 
         <table schema="PUBLIC" tableName="OWNER">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
-            <ignoreColumn column="opt_lock_version" />
+<!--            <ignoreColumn column="opt_lock_version" />-->
         </table>
         <table schema="PUBLIC" tableName="CAR">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
-            <ignoreColumn column="opt_lock_version" />
+<!--            <ignoreColumn column="opt_lock_version" />-->
         </table>
         <table schema="PUBLIC" tableName="PART">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
-            <ignoreColumn column="opt_lock_version" />
+<!--            <ignoreColumn column="opt_lock_version" />-->
         </table>
-        <table schema="PUBLIC" tableName="INSTRUCTED_CAR">
-            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
-            <ignoreColumn column="opt_lock_version" />
+        <table schema="PUBLIC" tableName="PART_CAR">
+<!--            <generatedKey column="id" identity="true" sqlStatement="JDBC" />-->
+<!--            <ignoreColumn column="opt_lock_version" />-->
         </table>
     </context>
 </generatorConfiguration>

@@ -6,26 +6,17 @@
 >
 <h:head/>
 <h:body>
-    <h2>Cars:</h2>
+    <h2>Owners:</h2>
     <ol>
-        <ui:repeat value="#{carsMyBatis.allCars}" var="car">
-            <li><h:link value="#{car.title}" outcome="owners?carId=#{car.id}" /></li>
-
-            <span>Parts: </span>
+        <ui:repeat value="#{ownersMyBatis.allOwners}" var="owner">
+            <li>#{owner.fullName}</li>
             <ul>
-                <ui:repeat value="#{car.parts}" var="part">
-                    <li>#{part.name}</li>
+                <ui:repeat value="#{owner.cars}" var="car">
+                    <li>#{car.title} #{car.price}</li>
                 </ui:repeat>
             </ul>
-            <hr/>
-
         </ui:repeat>
     </ol>
-    <h:form>
-        <label>Car title: </label>
-        <h:inputText value="#{carsMyBatis.carToCreate.title}" required="true" />
-        <h:commandButton value="Add new car" action="#{carsMyBatis.createCar}" />
-    </h:form>
     <h:link value="Back to jpa impl" outcome="/index"/>
 
     <hr/>

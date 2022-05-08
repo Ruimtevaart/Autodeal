@@ -7,7 +7,7 @@
         <typeAlias type="lt.vu.mybatis.model.Owner" alias="Owner"/>
         <typeAlias type="lt.vu.mybatis.model.Car" alias="Car"/>
         <typeAlias type="lt.vu.mybatis.model.Part" alias="Part"/>
-        <typeAlias type="lt.vu.mybatis.model.InstructedCar" alias="InstructedCar"/>
+        <typeAlias type="lt.vu.mybatis.model.PartCar" alias="PartCar"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -21,6 +21,6 @@
         <mapper resource="mybatis/xml/CarMapper.xml"/>
         <mapper resource="mybatis/xml/OwnerMapper.xml"/>
         <mapper resource="mybatis/xml/PartMapper.xml"/>
-        <mapper resource="mybatis/xml/InstructedCarMapper.xml"/>
+        <mapper resource="mybatis/xml/PartCarMapper.xml"/>
     </mappers>
 </configuration>
