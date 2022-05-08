@@ -32,7 +32,7 @@ public class OwnersMyBatis implements Serializable {
     @Transactional
     public String createOwner() {
         ownerMapper.insert(ownerToCreate);
-        return "/mybatis/owners?faces-redirect=true";
+        return "/myBatis/owners?faces-redirect=true";
     }
 
     private void loadAllOwners() {

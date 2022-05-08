@@ -17,8 +17,12 @@
             </ul>
         </ui:repeat>
     </ol>
+    <h:form>
+        <label>Add owner: </label>
+        <h:inputText value="#{ownersMyBatis.ownerToCreate.fullName}" required="true" />
+        <h:commandButton value="Add new owner" action="#{ownersMyBatis.createOwner}" />
+    </h:form>
     <h:link value="Back to jpa impl" outcome="/index"/>
-
     <hr/>
 </h:body>
 </html>
