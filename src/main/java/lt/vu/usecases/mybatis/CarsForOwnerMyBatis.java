@@ -34,9 +34,9 @@ public class CarsForOwnerMyBatis implements Serializable {
 
     @Transactional
     public String addCarForOwner() {
-//        carToAdd.setOwnerId(owner.getId());
+        carToAdd.setOwnerId(owner.getId());
         carMapper.insert(carToAdd);
-        return "/mybatis/owners?faces-redirect=true";
+        return "/myBatis/cars?faces-redirect=true&ownerId=" + this.owner.getId();
     }
 
     @PostConstruct

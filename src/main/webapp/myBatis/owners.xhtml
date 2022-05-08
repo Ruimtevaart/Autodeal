@@ -9,7 +9,7 @@
     <h2>Owners:</h2>
     <ol>
         <ui:repeat value="#{ownersMyBatis.allOwners}" var="owner">
-            <li>#{owner.fullName}</li>
+            <li><h:link value="#{owner.fullName}" outcome="/myBatis/cars?ownerId=#{owner.id}"/></li>
             <ul>
                 <ui:repeat value="#{owner.cars}" var="car">
                     <li>#{car.title} #{car.price}</li>

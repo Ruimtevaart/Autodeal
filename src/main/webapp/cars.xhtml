@@ -18,7 +18,7 @@
         <label>Car title: </label>
         <h:inputText a:placeholder="title" value="#{carsForOwner.carToCreate.title}" required="true"/>
         <h:inputText a:placeholder="price" value="#{carsForOwner.carToCreate.price}" required="true"/>
-        <h:commandButton value="Add owner to the car" action="#{carsForOwner.createCar}" >
+        <h:commandButton value="Add car to the owner" action="#{carsForOwner.createCar}" >
             <f:param name="ownerId" value="#{carsForOwner.owner.id}" />
         </h:commandButton>
     </h:form>
