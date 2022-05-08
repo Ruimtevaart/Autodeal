@@ -11,7 +11,17 @@
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
     <result column="OWNER_ID" jdbcType="INTEGER" property="ownerId" />
     <result column="PRICE" jdbcType="INTEGER" property="price" />
+
+    <collection property="parts" javaType="ArrayList"
+                ofType="lt.vu.mybatis.model.Part" column="id"
+                select="selectPartsForCar"/>
   </resultMap>
+  <select id="selectPartsForCar" resultType="lt.vu.mybatis.model.Part">
+    select *
+    from PUBLIC.part p
+    join PUBLIC.part_car pc on p.id = pc.part_id
+    where pc.car_id = #{id, jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated

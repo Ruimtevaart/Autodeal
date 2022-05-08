@@ -7,8 +7,20 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head/>
 <h:body>
-    <h2>Parts</h2>
-
-    <h:link outcome="/myBatis/cars" value="Back to cars page"/>
+    <h2>Parts that fit #{partsForCarMyBatis.car.title}</h2>
+    <ol>
+        <ui:repeat value="#{partsForCarMyBatis.car.parts}" var="part">
+            <li><h:link value="#{part.name} #{part.price}" outcome="/myBatis/owners"/></li>
+        </ui:repeat>
+    </ol>
+    <h2>Add part to this car</h2>
+    <h:form>
+        <h:inputText a:placeholder="name" value="#{partsForCarMyBatis.partToAdd.name}" required="true" />
+        <h:inputText a:placeholder="price" value="#{partsForCarMyBatis.partToAdd.price}" required="true"/>
+        <h:commandButton value="Add part to the car" action="#{partsForCarMyBatis.addPartToCar}" >
+            <f:param name="carId" value="#{partsForCarMyBatis.car.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:link outcome="/myBatis/owners" value="Back to myBatis owners page"/>
 </h:body>
 </html>

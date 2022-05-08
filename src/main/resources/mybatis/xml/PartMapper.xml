@@ -59,4 +59,9 @@
     select ID, NAME, PRICE
     from PUBLIC.PART
   </select>
+  <select id="findByName" resultType="lt.vu.mybatis.model.Part">
+    select ID, Name, PRICE
+    from PUBLIC.part p
+    where p.name = #{name, jdbcType=VARCHAR}
+  </select>
 </mapper>

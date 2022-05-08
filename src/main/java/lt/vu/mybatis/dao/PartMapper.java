@@ -45,4 +45,6 @@ public interface PartMapper {
      * @mbg.generated Sun May 08 13:33:14 EEST 2022
      */
     int updateByPrimaryKey(Part record);
+
+    Part findByName(String name);
 }
