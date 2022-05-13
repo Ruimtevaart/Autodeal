@@ -3,22 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 >
 <h:head/>
 <h:body>
     <h2>Owners:</h2>
     <ol>
         <ui:repeat value="#{owners.allOwners}" var="owner">
-            <li><h:link value="#{owner.firstName} #{owner.lastName}" outcome="cars?ownerId=#{owner.id}" /></li>
+            <li><h:link value="#{owner.fullName}" outcome="/cars?ownerId=#{owner.id}"/></li>
+            <span>Cars:</span>
+            <ul>
+                <ui:repeat value="#{owner.cars}" var="car">
+                    <li>#{car.title} #{car.price}</li>
+                </ui:repeat>
+            </ul>
         </ui:repeat>
     </ol>
+<br/>
+<br/>
     <h:form>
-        <h:inputText a:placeholder="First name" value="#{owners.ownerToCreate.firstName}" required="true"/>
-        <h:inputText a:placeholder="Last name" value="#{owners.ownerToCreate.lastName}" required="true"/>
-        <h:commandButton value="Add new owner" actionListener="#{owners.createOwner}" action="index?faces-redirect=true"/>
+        <label>Owner name:</label>
+        <h:inputText value="#{owners.ownerToCreate.fullName}" required="true" />
+        <h:commandButton value="Add new owner" action="#{owners.createOwner}" />
     </h:form>
-    <h:link outcome="myBatis/owners" value="MyBatis implementation"/><br/>
-    <h:link outcome="/parts" value="Parts page"/>
+
+    <h2>Parts:</h2>
+    <ol>
+        <ui:repeat value="#{parts.allParts}" var="part">
+            <li>#{part.name} (#{part.price})</li>
+            <span>Cars:</span>
+            <ul>
+                <ui:repeat value="#{part.cars}" var="car">
+                    <li>#{car.title}</li>
+                </ui:repeat>
+            </ul>
+        </ui:repeat>
+    </ol>
+
+    <h:link outcome="myBatis/owners" value="MyBatis implementation"/>
+
 </h:body>
 </html>

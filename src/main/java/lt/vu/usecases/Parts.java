@@ -1,38 +1,32 @@
 package lt.vu.usecases;
 
-import java.util.List;
+import lt.vu.entities.Part;
+import lt.vu.persistence.PartsDAO;
+import lombok.Getter;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
-import lombok.Getter;
-import lombok.Setter;
-import lt.vu.entities.Part;
-import lt.vu.persistence.PartsDAO;
+import java.io.Serializable;
+import java.util.List;
 
 @Model
-public class Parts {
-  @Inject
-  private PartsDAO partsDAO;
+public class Parts implements Serializable {
 
-  @Getter
-  @Setter
-  private Part partToCreate = new Part();
+    @Inject
+    private PartsDAO dao;
 
-  @Getter
-  private List<Part> allParts;
+    @Getter
+    private List<Part> allParts;
 
-  @PostConstruct
-  public void init(){
-    loadAllParts();
-  }
+    @PostConstruct
+    private void init() {
+        loadAllParts();
+    }
 
-  @Transactional
-  public void createPart(){
-    this.partsDAO.persist(partToCreate);
-  }
+    private void loadAllParts() {
+        allParts = dao.findAll();
+    }
 
-  private void loadAllParts(){
-    this.allParts = partsDAO.loadAll();
-  }
+
 }

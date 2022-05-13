@@ -9,14 +9,20 @@
     <h2>Owners:</h2>
     <ol>
         <ui:repeat value="#{ownersMyBatis.allOwners}" var="owner">
-            <li><h:link value="#{owner.firstName} #{owner.lastName}" outcome="cars?ownerId=#{owner.id}" /></li>
+            <li><h:link value="#{owner.fullName}" outcome="/myBatis/cars?ownerId=#{owner.id}"/></li>
+            <ul>
+                <ui:repeat value="#{owner.cars}" var="car">
+                    <li>#{car.title} #{car.price}</li>
+                </ui:repeat>
+            </ul>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText value="#{ownersMyBatis.ownerToCreate.firstName}" required="true" />
-        <h:inputText value="#{ownersMyBatis.ownerToCreate.lastName}" required="true"/>
+        <label>Add owner: </label>
+        <h:inputText value="#{ownersMyBatis.ownerToCreate.fullName}" required="true" />
         <h:commandButton value="Add new owner" action="#{ownersMyBatis.createOwner}" />
     </h:form>
-    <h:link value="Back to index" outcome="/index"/>
+    <h:link value="Back to jpa impl" outcome="/index"/>
+    <hr/>
 </h:body>
 </html>

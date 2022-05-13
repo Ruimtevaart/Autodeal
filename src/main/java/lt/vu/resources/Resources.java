@@ -1,4 +1,4 @@
-package lt.vu.persistence;
+package lt.vu.resources;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -8,22 +8,22 @@ import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
-import javax.persistence.SynchronizationType;
+
+import static javax.persistence.SynchronizationType.SYNCHRONIZED;
 
 @ApplicationScoped
 public class Resources {
 
     @PersistenceUnit
-    private EntityManagerFactory emf;
+    private EntityManagerFactory factory;
 
     @Produces
-    @Default
     @RequestScoped
-    private EntityManager createJTAEntityManager() {
-        return emf.createEntityManager(SynchronizationType.SYNCHRONIZED);
+    private EntityManager getEntityManager() {
+        return factory.createEntityManager(SYNCHRONIZED);
     }
 
-    private void closeDefaultEntityManager(@Disposes @Default EntityManager em) {
-        em.close();
+    private void closeEntityManager(@Disposes @Default EntityManager manager) {
+        manager.close();
     }
 }

@@ -3,21 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head/>
-    <h:body>
-        <h2>Parts:</h2>
-        <ol>
-            <ui:repeat value="#{parts.allParts}" var="part">
-                <li><h:link value="#{part.title} #{part.price}" outcome="partDetails?partId=#{part.id}" /></li>
-<!--                <li><h:link value="#{part.title} #{part.price}" /></li>-->
-            </ui:repeat>
-        </ol>
-        <h:form>
-            <h:inputText value="#{parts.partToCreate.title}" required="true"/>
-            <h:inputText value="#{parts.partToCreate.price}" required="true"/>
-            <h:commandButton value="Add new part" actionListener="#{parts.createPart}" action="parts?faces-redirect=true"/>
-        </h:form>
-        <h:link outcome="/index" value="Back to index"/>
-    </h:body>
+<h:body>
+    <h2>Parts compatible with #{partsForCar.car.title} (Price #{partsForCar.car.price})</h2>
+    <ol>
+        <ui:repeat value="#{partsForCar.car.parts}" var="part">
+            <li><h:link value="#{part.name} #{part.price}" outcome="/carsForPart?partId=#{part.id}"/></li>
+        </ui:repeat>
+    </ol>
+    <h2>Add part to this car:</h2>
+    <h:form>
+        <label>Part name: </label>
+        <h:inputText a:placeholder="name" value="#{partsForCar.partToAdd.name}" required="true"/>
+        <h:inputText a:placeholder="price" value="#{partsForCar.partToAdd.price}" required="true"/>
+        <h:commandButton value="Add part to the car" action="#{partsForCar.createPart}" >
+            <f:param name="carId" value="#{partsForCar.car.id}" />
+        </h:commandButton>
+    </h:form>
+
+    <h:form>
+        <h2>Add part from dropdown:</h2>
+        <label>Part name:</label>
+        <h:selectOneMenu title="Available parts" value="#{partsForCar.partToAdd}" converter="#{partConverter}">
+            <f:selectItems value="#{partsForCar.allParts}" var="partvar" itemValue="#{partvar.label}" />
+        </h:selectOneMenu>
+
+        <h:commandButton value="Add part to the car" action="#{partsForCar.createPartFromDropdown}" >
+            <f:param name="carId" value="#{partsForCar.car.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:link outcome="index?faces-redirect=true" value="Back to owners page"/>
+
+</h:body>
 </html>

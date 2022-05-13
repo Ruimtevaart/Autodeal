@@ -1,67 +1,54 @@
 package lt.vu.entities;
 
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@FieldDefaults(level = PRIVATE)
+@Table(name = "CAR")
 @NamedQueries({
         @NamedQuery(name = "Car.findAll", query = "select a from Car as a")
 })
-@Table(name = "CAR")
-@Getter @Setter
-public class Car implements Serializable {
+public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = IDENTITY)
+    Integer id;
 
     @Size(max = 50)
-    @Column(name = "MAKE")
-    private String make;
-
-    @Column(name = "YEAR")
-    private Integer year;
-
-    @ManyToOne
-    @JoinColumn(name="OWNER_ID")
-    private Owner owner;
-
-    @Size(max = 50)
-    @Column(name = "MODEL")
-    private String model;
+    @Column(name = "TITLE")
+    String title;
 
     @Column(name = "PRICE")
-    private Integer price;
+    int price;
 
-    @ManyToMany
-    @JoinColumn(name = "compatibleCars")
-    private List<Part> compatibleParts = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "OWNER_ID")
+    Owner owner;
 
-    @Version
-    @Column(name = "OPT_LOCK_VERSION")
-    private Integer version;
+    @ManyToMany(mappedBy = "cars")
+    List<Part> parts;
 
-    public Car() {
+    public Car(String title) {
+        this.title = title;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Car car = (Car) o;
-        return Objects.equals(id, car.id) &&
-                Objects.equals(make, car.make);
+    public Car(String title, Owner owner) {
+        this(title);
+        this.owner = owner;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, make);
-    }
 }

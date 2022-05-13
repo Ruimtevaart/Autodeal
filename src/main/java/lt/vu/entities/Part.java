@@ -1,47 +1,52 @@
 package lt.vu.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Objects;
+
+import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
-@NamedQueries({
-  @NamedQuery(name = "Part.findAll", query = "select p from Part as p")
-})
+@Getter
+@Setter
+@NoArgsConstructor
+@FieldDefaults(level = PRIVATE)
 @Table(name = "PART")
-@Getter @Setter
+@NamedQueries({
+        @NamedQuery(name = "Part.findAll", query = "select a from Part as a"),
+        @NamedQuery(name = "Part.findByName", query = "select a from Part as a where lower(a.name) = lower(:name)")
+})
+@EqualsAndHashCode
 public class Part {
 
-    public Part(){}
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = IDENTITY)
+    Integer id;
 
-    @Column(name = "TITLE")
-    private String title;
+    @Column(name = "NAME")
+    String name;
 
     @Column(name = "PRICE")
-    private Integer price;
+    int price;
 
-    @ManyToMany(mappedBy = "compatibleParts")
-    private List<Car> compatibleCars = new ArrayList<>();
+    @Column
+    @ManyToMany
+    @JoinTable(
+            name = "PART_CAR",
+            joinColumns = @JoinColumn(name = "PART_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CAR_ID")
+    )
+    List<Car> cars;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Part part = (Part) o;
-        return Objects.equals(id, part.id) && Objects.equals(title, part.title)
-          && Objects.equals(price, part.price);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, price);
+    public Part(String name) {
+        this.name = name;
     }
 }

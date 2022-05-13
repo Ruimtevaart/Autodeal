@@ -1,6 +1,8 @@
 package lt.vu.persistence;
 
+import lt.vu.entities.Car;
 import lt.vu.entities.Owner;
+import lombok.Setter;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -10,22 +12,19 @@ import java.util.List;
 @ApplicationScoped
 public class OwnersDAO {
 
+    @Setter
     @Inject
-    private EntityManager em;
+    private EntityManager entityManager;
+
+    public void persist(Owner owner) {
+        entityManager.persist(owner);
+    }
 
     public List<Owner> loadAll() {
-        return em.createNamedQuery("Owner.findAll", Owner.class).getResultList();
+        return entityManager.createNamedQuery("Owner.findAll", Owner.class).getResultList();
     }
 
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
-
-    public void persist(Owner owner){
-        this.em.persist(owner);
-    }
-
-    public Owner findOne(Integer id) {
-        return em.find(Owner.class, id);
+    public Owner findOne(int id) {
+        return entityManager.find(Owner.class, id);
     }
 }

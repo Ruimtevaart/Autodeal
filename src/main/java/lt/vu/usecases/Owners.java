@@ -3,37 +3,41 @@ package lt.vu.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.persistence.OwnersDAO;
-import lt.vu.entities.Owner;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.io.Console;
+import java.io.Serializable;
 import java.util.List;
 
 @Model
-public class Owners {
+public class Owners implements Serializable {
 
     @Inject
     private OwnersDAO ownersDAO;
 
-    @Getter @Setter
-    private Owner ownerToCreate = new Owner();
+    @Getter
+    @Setter
+    private lt.vu.entities.Owner ownerToCreate = new lt.vu.entities.Owner();
 
     @Getter
-    private List<Owner> allOwners;
+    private List<lt.vu.entities.Owner> allOwners;
 
     @PostConstruct
-    public void init(){
+    private void init() {
         loadAllOwners();
     }
 
     @Transactional
-    public void createOwner(){
-        this.ownersDAO.persist(ownerToCreate);
+    public String createOwner() {
+        System.out.println("createOwner triggered");
+        ownersDAO.persist(ownerToCreate);
+        return "index?faces-redirect=true";
     }
 
-    private void loadAllOwners(){
+    private void loadAllOwners() {
         this.allOwners = ownersDAO.loadAll();
     }
 }
