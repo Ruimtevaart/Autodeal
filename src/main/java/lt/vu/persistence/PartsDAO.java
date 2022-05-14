@@ -39,7 +39,7 @@ public class PartsDAO {
         return entityManager.find(Part.class, id);
     }
 
-    public void update(Part part) {
-        entityManager.merge(part);
+    public Part update(Part part) {
+        return entityManager.merge(part);
     }
 }

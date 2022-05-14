@@ -45,6 +45,10 @@ public class Part {
     )
     List<Car> cars;
 
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
+
 
     public Part(String name) {
         this.name = name;
