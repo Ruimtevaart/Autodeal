@@ -1,5 +1,6 @@
 package lt.vu.rest;
 
+import java.util.HashMap;
 import lt.vu.entities.Part;
 import lt.vu.persistence.PartsDAO;
 import lt.vu.rest.resource.PartDto;
@@ -14,6 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import lt.vu.service.NameChecker;
 import lt.vu.service.NameNumberChecker;
+import lt.vu.service.NameSymbolChecker;
 
 import static java.util.Objects.isNull;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -32,6 +34,9 @@ public class PartsController {
 
   @Inject
   private NameChecker nameChecker;
+
+  @Inject
+  private NameSymbolChecker nameSymbolChecker;
 
   @GET
   @Path("/{id}")
@@ -55,9 +60,11 @@ public class PartsController {
     }
     PartDto partDto = new PartDto(part.getName(), part.getPrice());
 
-    boolean check2 = nameChecker.containsSpecialChars(partDto.getName());
+    HashMap<String, Boolean> response = new HashMap<>();
+    response.put("alternativeNameCheck", nameChecker.containsSpecialChars(partDto.getName()));
+    response.put("specializesNameCheck", nameSymbolChecker.containsSpecialChars(partDto.getName()));
 
-    return ok(check2).build();
+    return ok(response).build();
   }
 
   @PUT
