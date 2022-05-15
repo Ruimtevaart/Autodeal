@@ -1,6 +1,7 @@
 package lt.vu.rest;
 
 import java.util.HashMap;
+import lt.vu.decorator.PartNameCapitalizer;
 import lt.vu.entities.Part;
 import lt.vu.interceptors.Logger;
 import lt.vu.persistence.PartsDAO;
@@ -38,6 +39,9 @@ public class PartsController {
 
   @Inject
   private NameSymbolChecker nameSymbolChecker;
+
+  @Inject
+  private PartNameCapitalizer partNameCapitalizer;
 
   @GET
   @Path("/{id}")
@@ -95,6 +99,16 @@ public class PartsController {
   @Consumes(APPLICATION_JSON)
   @Transactional
   public Response create(Part part) {
+    partsDAO.persist(part);
+    return ok().build();
+  }
+
+  @POST
+  @Path("/alt")
+  @Consumes(APPLICATION_JSON)
+  @Transactional
+  public Response createUpperCase(Part part) {
+    part.setName(partNameCapitalizer.capitalizeName(part.getName()));
     partsDAO.persist(part);
     return ok().build();
   }

@@ -5,7 +5,7 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
   bean-discovery-mode="annotated">
-<!--Jeigu noriu isjungti interceptor, uzkomentuoti sita koda-->
+  <!--Jeigu noriu isjungti interceptor, uzkomentuoti sita koda-->
   <interceptors>
     <class>lt.vu.interceptors.MethodLogger</class>
   </interceptors>
@@ -14,4 +14,9 @@
   <alternatives>
     <class>lt.vu.service.NameNumberChecker</class>
   </alternatives>
+
+  <!--Jeigu noriu isjungti decorator, uzkomentuoti sita koda-->
+  <decorators>
+    <class>lt.vu.decorator.PartNameCapitalizerDecorator</class>
+  </decorators>
 </beans>
