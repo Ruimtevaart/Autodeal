@@ -2,6 +2,7 @@ package lt.vu.rest;
 
 import java.util.HashMap;
 import lt.vu.entities.Part;
+import lt.vu.interceptors.Logger;
 import lt.vu.persistence.PartsDAO;
 import lt.vu.rest.resource.PartDto;
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class PartsController {
   @GET
   @Path("/{id}")
   @Produces(APPLICATION_JSON)
+  @Logger
   public Response getById(@PathParam("id") Integer id) {
     Part part = partsDAO.findOne(id);
     if (isNull(part)) {
