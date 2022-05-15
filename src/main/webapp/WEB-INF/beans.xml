@@ -10,7 +10,7 @@
     <class>lt.vu.interceptors.MethodLogger</class>
   </interceptors>
 
-<!--  <alternatives>-->
-<!--    <class>TODO</class>-->
-<!--  </alternatives>-->
+  <alternatives>
+    <class>lt.vu.service.NameNumberChecker</class>
+  </alternatives>
 </beans>

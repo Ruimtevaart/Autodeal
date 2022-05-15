@@ -12,6 +12,8 @@ import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import lt.vu.service.NameChecker;
+import lt.vu.service.NameNumberChecker;
 
 import static java.util.Objects.isNull;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -28,6 +30,9 @@ public class PartsController {
   @Setter
   private PartsDAO partsDAO;
 
+  @Inject
+  private NameChecker nameChecker;
+
   @GET
   @Path("/{id}")
   @Produces(APPLICATION_JSON)
@@ -38,6 +43,21 @@ public class PartsController {
     }
     PartDto partDto = new PartDto(part.getName(), part.getPrice());
     return ok(partDto).build();
+  }
+
+  @GET
+  @Path("/alt/{id}")
+  @Produces(APPLICATION_JSON)
+  public Response getByIdAlt(@PathParam("id") Integer id) {
+    Part part = partsDAO.findOne(id);
+    if (isNull(part)) {
+      return status(NOT_FOUND).build();
+    }
+    PartDto partDto = new PartDto(part.getName(), part.getPrice());
+
+    boolean check2 = nameChecker.containsSpecialChars(partDto.getName());
+
+    return ok(check2).build();
   }
 
   @PUT
