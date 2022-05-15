@@ -21,6 +21,12 @@
         </h:commandButton>
         <h:outputText value="This value has already been overriden by another user. Please try again." rendered="#{param['error'] == 'optimistic-lock-exception'}"/>
     </h:form>
+    <h:form>
+        <h:outputText value="#{generatePartPrice.priceGenerationStatus}" />
+        <h:commandButton value="Generate part price" disabled="#{generatePartPrice.priceGenerationRunning}" action="#{generatePartPrice.generateNewPrice()}">
+            <f:param name="partId" value="#{carsForPart.part.id}" />
+        </h:commandButton>
+    </h:form>
     <h:link outcome="index?faces-redirect=true" value="Back to owners page"/>
 
 </h:body>
