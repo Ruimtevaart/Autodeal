@@ -17,6 +17,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import lt.vu.service.NameChecker;
 import lt.vu.service.NameNumberChecker;
+import lt.vu.service.NameSlashChecker;
 import lt.vu.service.NameSymbolChecker;
 
 import static java.util.Objects.isNull;
@@ -35,10 +36,10 @@ public class PartsController {
   private PartsDAO partsDAO;
 
   @Inject
-  private NameChecker nameChecker;
+  private NameChecker nameChecker;//alternative
 
   @Inject
-  private NameSymbolChecker nameSymbolChecker;
+  private NameSlashChecker nameSlashChecker;//specializes
 
   @Inject
   private PartNameCapitalizer partNameCapitalizer;
@@ -67,8 +68,8 @@ public class PartsController {
     PartDto partDto = new PartDto(part.getName(), part.getPrice());
 
     HashMap<String, Boolean> response = new HashMap<>();
-    response.put("alternativeNameCheck", nameChecker.containsSpecialChars(partDto.getName()));
-    response.put("specializesNameCheck", nameSymbolChecker.containsSpecialChars(partDto.getName()));
+    response.put("alternativeNameCheck", nameChecker.containsSpecialChars(partDto.getName()));//alternative
+    response.put("specializesNameCheck", nameSlashChecker.containsSlash(partDto.getName()));//specializes
 
     return ok(response).build();
   }

@@ -10,9 +10,9 @@
     <class>lt.vu.interceptors.MethodLogger</class>
   </interceptors>
 
-  <!--Jeigu noriu pakeisti alternative, pakeisti NameNumberChecker i NameSymbolChecker-->
+  <!--Jeigu noriu pakeisti i default (NameNumberChecker) is alternative (NameSymbolChecker), uzkomentuoti-->
   <alternatives>
-    <class>lt.vu.service.NameNumberChecker</class>
+    <class>lt.vu.service.NameSymbolChecker</class>
   </alternatives>
 
   <!--Jeigu noriu isjungti decorator, uzkomentuoti sita koda-->

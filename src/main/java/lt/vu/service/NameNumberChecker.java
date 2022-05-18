@@ -2,9 +2,10 @@ package lt.vu.service;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Default;
 import lt.vu.interceptors.Logger;
 
-@Alternative
+@Default
 @ApplicationScoped
 public class NameNumberChecker implements NameChecker {
 
